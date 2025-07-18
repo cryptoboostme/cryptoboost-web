@@ -1,45 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>CryptoBoost - SMM Panel</title>
-<link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CryptoBoost - SMM Panel</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-<header>
-  <h1>CryptoBoost - Buy Followers, Likes & Views with Crypto</h1>
-</header>
+  <header>
+    <h1>CryptoBoost - Buy Followers, Likes & Views with Crypto</h1>
+  </header>
 
-<section id="catalog">
-  <h2>Our Services</h2>
-  <div class="service">
-    <h3>Instagram Followers</h3>
-    <p>Delivery: 0-12h | Price: €2.99 per 1000</p>
-    <label>Amount: <input type="number" id="igFollowersAmount" value="1000" min="100" /></label><br />
-    <label>Instagram Username or Post Link: <input type="text" id="igFollowersUser" /></label><br />
-    <p>Total Price: €<span id="igFollowersTotal">2.99</span></p>
-  </div>
+  <section id="catalog">
+    <h2>Our Services</h2>
 
-  <div class="service">
-    <h3>TikTok Likes</h3>
-    <p>Delivery: 0-6h | Price: €1.29 per 1000</p>
-    <label>Amount: <input type="number" id="ttLikesAmount" value="1000" min="100" /></label><br />
-    <label>TikTok Username or Post Link: <input type="text" id="ttLikesUser" /></label><br />
-    <p>Total Price: €<span id="ttLikesTotal">1.29</span></p>
-  </div>
-</section>
+    <div class="service">
+      <h3>Instagram Followers</h3>
+      <p>Delivery: 0-12h | Price: €2.99 per 1000</p>
+      <label>Amount: <input type="number" class="amount" data-price="2.99" data-target="igFollowersTotal" value="1000" min="100" /></label><br />
+      <label>Instagram Username or Post Link: <input type="text" class="user" placeholder="@username or post URL" /></label><br />
+      <p>Total Price: €<span id="igFollowersTotal">2.99</span></p>
+    </div>
 
-<section id="payment">
-  <h2>Payment Instructions</h2>
-  <p>Send your crypto payment to one of these wallets:</p>
-  <ul>
-    <li>ETH / USDT / BNB: <code>0x7c30f50325dE8626e83e8FE833c122F1df213bDc</code></li>
-    <li>BTC: <code>bc1qt6jd6dpfdzxl77qgshxrxpxtz6qce5nwerf4jj</code></li>
-    <li>USDT TRC20: <code>TAL5nUx5DrPZeci3Mm9TwvhYp5T3LftpBi</code></li>
-  </ul>
-</section>
+    <div class="service">
+      <h3>Instagram Likes</h3>
+      <p>Delivery: 0-6h | Price: €1.49 per 1000</p>
+      <label>Amount: <input type="number" class="amount" data-price="1.49" data-target="igLikesTotal" value="1000" min="100" /></label><br />
+      <label>Instagram Post Link: <input type="text" class="user" placeholder="Post URL" /></label><br />
+      <p>Total Price: €<span id="igLikesTotal">1.49</span></p>
+    </div>
 
-<script src="scripts.js"></script>
+    <div class="service">
+      <h3>TikTok Followers</h3>
+      <p>Delivery: 0-12h | Price: €2.49 per 1000</p>
+      <label>Amount: <input type="number" class="amount" data-price="2.49" data-target="ttFollowersTotal" value="1000" min="100" /></label><br />
+      <label>TikTok Username or Post Link: <input type="text" class="user" placeholder="@username or post URL" /></label><br />
+      <p>Total Price: €<span id="ttFollowersTotal">2.49</span></p>
+    </div>
+
+    <div class="service">
+      <h3>TikTok Likes</h3>
+      <p>Delivery: 0-6h | Price: €1.29 per 1000</p>
+      <label>Amount: <input type="number" class="amount" data-price="1.29" data-target="ttLikesTotal" value="1000" min="100" /></label><br />
+      <label>TikTok Post Link: <input type="text" class="user" placeholder="Post URL" /></label><br />
+      <p>Total Price: €<span id="ttLikesTotal">1.29</span></p>
+    </div>
+
+    <div class="service">
+      <h3>Telegram Members</h3>
+      <p>Delivery: 0-24h | Price: €3.49 per 1000</p>
+      <label>Amount: <input type="number" class="amount" data-price="3.49" data-target="tgMembersTotal" value="1000" min="100" /></label><br />
+      <label>Telegram Channel Link: <input type="text" class="user" placeholder="Channel URL" /></label><br />
+      <p>Total Price: €<span id="tgMembersTotal">3.49</span></p>
+    </div>
+
+    <div class="service">
+      <h3>YouTube Views</h3>
+      <p>Delivery: 0-24h | Price: €1.99 per 1000</p>
+      <label>Amount: <input type="number" class="amount" data-price="1.99" data-target="ytViewsTotal" value="1000" min="100" /></label><br />
+      <label>YouTube Video Link: <input type="text" class="user" placeholder="Video URL" /></label><br />
+      <p>Total Price: €<span id="ytViewsTotal">1.99</span></p>
+    </div>
+
+  </section>
+
+  <section id="order-form">
+    <h2>Place Your Order</h2>
+    <form id="orderForm">
+      <label for="serviceSelect">Select Service:</label><br />
+      <select id="serviceSelect" required>
+        <option value="">-- Select --</option>
+        <option value="igFollowers">Instagram Followers</option>
+        <option value="igLikes">Instagram Likes</option>
+        <option value="ttFollowers">TikTok Followers</option>
+        <option value="ttLikes">TikTok Likes</option>
+        <option value="tgMembers">Telegram Members</option>
+        <option value="ytViews">YouTube Views</option>
+      </select><br /><br />
+
+      <label for="orderAmount">Amount:</label><br />
+      <input type="number" id="orderAmount" min="100" required /><br /><br />
+
+      <label for="orderUser">Username or Link:</label><br />
+      <input type="text" id="orderUser" placeholder="@username or post URL" required /><br /><br />
+
+      <p>Total Price: €<span id="orderTotal">0.00</span></p>
+
+      <button type="submit">Submit Order</button>
+    </form>
+  </section>
+
+  <section id="payment-info">
+    <h2>Payment Instructions</h2>
+    <p>Please send your crypto payment to one of these wallets:</p>
+    <ul>
+      <li><strong>ETH / USDT / BNB:</strong> <code>0x7c30f50325dE8626e83e8FE833c122F1df213bDc</code></li>
+      <li><strong>BTC:</strong> <code>bc1qt6jd6dpfdzxl77qgshxrxpxtz6qce5nwerf4jj</code></li>
+      <li><strong>USDT TRC20:</strong> <code>TAL5nUx5DrPZeci3Mm9TwvhYp5T3LftpBi</code></li>
+    </ul>
+    <p>After payment, please send your payment proof to <a href="https://t.me/CRYPTOBOOSTSUPPORT" target="_blank">@CRYPTOBOOSTSUPPORT</a> on Telegram.</p>
+  </section>
+
+  <section id="faq">
+    <h2>Frequently Asked Questions (FAQ)</h2>
+    <details>
+      <summary>How long does delivery take?</summary>
+      <p>Delivery time depends on the service, usually between 0-24 hours.</p>
+    </details>
+    <details>
+      <summary>What payment methods do you accept?</summary>
+      <p>We accept cryptocurrency payments only: ETH, BTC, USDT, BNB, TRC20.</p>
+    </details>
+    <details>
+      <summary>Is my information safe?</summary>
+      <p>Yes, we do not store any sensitive information beyond the order details.</p>
+    </details>
+  </section>
+
+  <footer>
+    <p>© 2025 CryptoBoost. All rights reserved.</p>
+  </footer>
+
+  <script src="scripts.js"></script>
 </body>
 </html>
