@@ -1,83 +1,93 @@
-// Actualiza el precio en la sección catálogo
-document.querySelectorAll('.amount').forEach(input => {
-  input.addEventListener('input', () => {
-    const pricePer1000 = parseFloat(input.dataset.price);
-    const amount = parseInt(input.value) || 0;
-    const total = (amount / 1000) * pricePer1000;
-    const targetId = input.dataset.target;
-    document.getElementById(targetId).innerText = total.toFixed(2);
-  });
-});
-
-// Inicializa precios en catálogo
-document.querySelectorAll('.amount').forEach(input => {
-  const pricePer1000 = parseFloat(input.dataset.price);
-  const amount = parseInt(input.value) || 0;
-  const total = (amount / 1000) * pricePer1000;
-  const targetId = input.dataset.target;
-  document.getElementById(targetId).innerText = total.toFixed(2);
-});
-
-// Manejo formulario pedido
-const servicesData = {
-  igFollowers: 2.99,
-  igLikes: 1.49,
-  ttFollowers: 2.49,
-  ttLikes: 1.29,
-  tgMembers: 3.49,
-  ytViews: 1.99,
+const services = {
+  ig_followers: { name: "Instagram Followers", pricePer1000: 2.99 },
+  ig_verified_followers: { name: "Instagram Verified Followers", pricePer1000: 9.99 },
+  ig_likes: { name: "Instagram Likes", pricePer1000: 1.49 },
+  ig_verified_likes: { name: "Instagram Verified Likes", pricePer1000: 4.99 },
+  ig_comments: { name: "Instagram Comments", pricePer1000: 3.99 },
+  ig_verified_comments: { name: "Instagram Verified Comments", pricePer1000: 8.99 },
+  tt_followers: { name: "TikTok Followers", pricePer1000: 2.49 },
+  tt_verified_followers: { name: "TikTok Verified Followers", pricePer1000: 9.99 },
+  tt_likes: { name: "TikTok Likes", pricePer1000: 1.29 },
+  tt_verified_likes: { name: "TikTok Verified Likes", pricePer1000: 4.99 },
+  tt_comments: { name: "TikTok Comments", pricePer1000: 3.99 },
+  tg_members: { name: "Telegram Members", pricePer1000: 3.49 },
+  tg_likes: { name: "Telegram Likes", pricePer1000: 2.49 },
+  tg_boost: { name: "Telegram Boost", pricePer1000: 3.99 },
+  yt_views: { name: "YouTube Views", pricePer1000: 1.99 },
+  yt_likes: { name: "YouTube Likes", pricePer1000: 1.49 },
+  yt_comments: { name: "YouTube Comments", pricePer1000: 2.99 },
+  snap_followers: { name: "Snapchat Followers", pricePer1000: 3.99 },
+  spotify_followers: { name: "Spotify Followers", pricePer1000: 4.99 },
+  kick_followers: { name: "Kick Followers", pricePer1000: 2.99 },
 };
 
-const serviceNames = {
-  igFollowers: "Instagram Followers",
-  igLikes: "Instagram Likes",
-  ttFollowers: "TikTok Followers",
-  ttLikes: "TikTok Likes",
-  tgMembers: "Telegram Members",
-  ytViews: "YouTube Views",
-};
+const serviceSelect = document.getElementById("serviceSelect");
+const amountInput = document.getElementById("amountInput");
+const userInput = document.getElementById("userInput");
+const priceValue = document.getElementById("priceValue");
+const submitOrder = document.getElementById("submitOrder");
 
-const orderForm = document.getElementById('orderForm');
-const serviceSelect = document.getElementById('serviceSelect');
-const orderAmount = document.getElementById('orderAmount');
-const orderUser = document.getElementById('orderUser');
-const orderTotal = document.getElementById('orderTotal');
-
-function updateOrderTotal() {
-  const selectedService = serviceSelect.value;
-  const amount = parseInt(orderAmount.value) || 0;
-  if (servicesData[selectedService] && amount >= 100) {
-    const price = (amount / 1000) * servicesData[selectedService];
-    orderTotal.innerText = price.toFixed(2);
+function updatePrice() {
+  const service = serviceSelect.value;
+  const amount = parseInt(amountInput.value);
+  if (services[service] && amount >= 100) {
+    const total = (amount / 1000) * services[service].pricePer1000;
+    priceValue.textContent = total.toFixed(2);
   } else {
-    orderTotal.innerText = "0.00";
+    priceValue.textContent = "0.00";
   }
 }
 
-serviceSelect.addEventListener('change', () => {
-  // Ajusta valor mínimo según servicio si quieres
-  orderAmount.value = 100;
-  updateOrderTotal();
+serviceSelect.addEventListener("change", () => {
+  amountInput.value = 100;
+  priceValue.textContent = "0.00";
+  userInput.value = "";
+  updatePrice();
 });
 
-orderAmount.addEventListener('input', updateOrderTotal);
+amountInput.addEventListener("input", updatePrice);
 
-orderForm.addEventListener('submit', e => {
-  e.preventDefault();
-  if (!serviceSelect.value) {
+submitOrder.addEventListener("click", () => {
+  const service = serviceSelect.value;
+  const amount = parseInt(amountInput.value);
+  const user = userInput.value.trim();
+
+  if (!service) {
     alert("Please select a service.");
     return;
   }
-  if (orderAmount.value < 100) {
-    alert("Minimum amount is 100.");
+  if (!user) {
+    alert("Please enter a username or link.");
     return;
   }
-  if (!orderUser.value.trim()) {
-    alert("Please enter your username or link.");
+  if (!amount || amount < 100) {
+    alert("Amount must be at least 100.");
     return;
   }
-  // Aquí podrías agregar lógica para enviar pedido a backend o API
-  alert(`Order submitted!\nService: ${serviceNames[serviceSelect.value]}\nAmount: ${orderAmount.value}\nUser: ${orderUser.value}\nTotal: €${orderTotal.innerText}\n\nPlease send payment to the crypto wallets and send proof to @CRYPTOBOOSTSUPPORT on Telegram.`);
-  orderForm.reset();
-  orderTotal.innerText = "0.00";
+
+  const totalPrice = (amount / 1000) * services[service].pricePer1000;
+
+  alert(
+    `Order Details:\nService: ${services[service].name}\nAmount: ${amount}\nUser: ${user}\nTotal Price: €${totalPrice.toFixed(
+      2
+    )}\n\nPlease send payment to one of the crypto wallets listed and send your payment proof to @CRYPTOBOOSTSUPPORT on Telegram.`
+  );
+
+  serviceSelect.value = "";
+  amountInput.value = 100;
+  userInput.value = "";
+  priceValue.textContent = "0.00";
+});
+
+// Copy wallet buttons
+document.querySelectorAll(".copy-btn").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const wallet = btn.getAttribute("data-copy");
+    navigator.clipboard.writeText(wallet).then(() => {
+      btn.textContent = "Copied!";
+      setTimeout(() => {
+        btn.textContent = "Copy";
+      }, 1500);
+    });
+  });
 });

@@ -1,90 +1,191 @@
-/* Reset & basics */
+/* Reset */
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  max-width: 900px;
-  margin: 0 auto;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: #f1f1f1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 20px;
-  background: #f7f9fc;
-  color: #333;
 }
 
-header, footer {
+header {
+  margin-bottom: 40px;
   text-align: center;
-  margin-bottom: 30px;
+  animation: fadeInDown 1s ease forwards;
 }
 
 header h1 {
-  color: #0056b3;
+  font-size: 2.5rem;
+  color: #00d1ff;
+  text-shadow: 0 0 10px #00d1ff;
 }
 
-h2 {
-  color: #007bff;
-  border-bottom: 2px solid #007bff;
-  padding-bottom: 8px;
-  margin-bottom: 20px;
-}
-
-.service {
-  background: white;
-  padding: 20px;
-  margin-bottom: 20px;
-  border-radius: 12px;
-  box-shadow: 0 0 15px rgb(0 123 255 / 0.2);
-}
-
-label {
-  display: block;
-  margin: 10px 0 5px;
-}
-
-input[type="number"], input[type="text"], select {
+main {
+  background: rgba(255 255 255 / 0.1);
+  backdrop-filter: blur(15px);
+  border-radius: 20px;
+  max-width: 600px;
   width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 1rem;
+  padding: 30px 40px;
+  box-shadow: 0 0 25px rgb(0 209 255 / 0.4);
+  animation: fadeInUp 1s ease forwards;
 }
 
-button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 14px 28px;
-  font-size: 1.1rem;
-  border-radius: 8px;
-  cursor: pointer;
-  margin-top: 10px;
-  transition: background-color 0.3s ease;
+.catalog h2,
+.payment-info h2 {
+  color: #00d1ff;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #00d1ff;
+  padding-bottom: 6px;
 }
 
-button:hover {
-  background-color: #0056b3;
-}
-
-#payment-info ul {
-  list-style-type: none;
-  padding-left: 0;
-}
-
-#payment-info ul li {
-  background: #e9f1ff;
+.service-selector label,
+.order-inputs label {
+  display: block;
   margin-bottom: 8px;
-  padding: 10px;
-  border-radius: 8px;
-  font-family: monospace;
   font-weight: 600;
 }
 
-details {
-  margin-bottom: 12px;
+#serviceSelect,
+#amountInput,
+#userInput {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  font-size: 1rem;
+  outline: none;
+  margin-bottom: 20px;
+  background: rgba(255 255 255 / 0.15);
+  color: #f1f1f1;
+  transition: background-color 0.3s ease;
 }
 
-footer p {
-  font-size: 0.9rem;
-  color: #666;
+#serviceSelect:hover,
+#amountInput:hover,
+#userInput:hover,
+#serviceSelect:focus,
+#amountInput:focus,
+#userInput:focus {
+  background: rgba(255 255 255 / 0.3);
+}
+
+.price-display {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 25px;
+  color: #00e0ff;
+  text-align: center;
+  text-shadow: 0 0 6px #00e0ff;
+}
+
+button#submitOrder {
+  background: linear-gradient(90deg, #00d1ff, #0052ff);
+  border: none;
+  padding: 15px;
+  width: 100%;
+  border-radius: 20px;
+  font-size: 1.2rem;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgb(0 209 255 / 0.7);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+button#submitOrder:hover {
+  box-shadow: 0 8px 20px rgb(0 209 255 / 0.9);
+  transform: translateY(-3px);
+}
+
+.payment-info ul {
+  list-style: none;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.payment-info li {
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  font-family: monospace;
+  font-weight: 600;
+  background: rgba(255 255 255 / 0.1);
+  padding: 10px 15px;
+  border-radius: 10px;
+  justify-content: space-between;
+  box-shadow: 0 0 15px rgb(0 209 255 / 0.3);
+}
+
+.copy-btn {
+  background: #00d1ff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 12px;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.3s ease;
+}
+
+.copy-btn:hover {
+  background: #0052ff;
+}
+
+.copy-btn:active {
+  transform: scale(0.95);
+}
+
+footer {
   margin-top: 40px;
+  color: #666;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* Animations */
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-25px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  main {
+    padding: 20px;
+  }
+
+  header h1 {
+    font-size: 1.8rem;
+  }
+
+  button#submitOrder {
+    font-size: 1rem;
+    padding: 12px;
+  }
 }

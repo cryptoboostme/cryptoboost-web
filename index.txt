@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>CryptoBoost - SMM Panel</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>CryptoBoost - Social Media Services with Crypto Payments</h1>
+  </header>
+
+  <main>
+    <section class="catalog">
+      <h2>Services Catalog</h2>
+      <div class="service-selector">
+        <label for="serviceSelect">Choose a Service:</label>
+        <select id="serviceSelect">
+          <option value="" disabled selected>Select a service</option>
+          <!-- Instagram -->
+          <optgroup label="Instagram">
+            <option value="ig_followers">Followers</option>
+            <option value="ig_verified_followers">Verified Followers</option>
+            <option value="ig_likes">Likes</option>
+            <option value="ig_verified_likes">Verified Likes</option>
+            <option value="ig_comments">Comments</option>
+            <option value="ig_verified_comments">Verified Comments</option>
+          </optgroup>
+          <!-- TikTok -->
+          <optgroup label="TikTok">
+            <option value="tt_followers">Followers</option>
+            <option value="tt_verified_followers">Verified Followers</option>
+            <option value="tt_likes">Likes</option>
+            <option value="tt_verified_likes">Verified Likes</option>
+            <option value="tt_comments">Comments</option>
+          </optgroup>
+          <!-- Telegram -->
+          <optgroup label="Telegram">
+            <option value="tg_members">Members</option>
+            <option value="tg_likes">Likes</option>
+            <option value="tg_boost">Boost</option>
+          </optgroup>
+          <!-- YouTube -->
+          <optgroup label="YouTube">
+            <option value="yt_views">Views</option>
+            <option value="yt_likes">Likes</option>
+            <option value="yt_comments">Comments</option>
+          </optgroup>
+          <!-- Others -->
+          <optgroup label="Others">
+            <option value="snap_followers">Snapchat Followers</option>
+            <option value="spotify_followers">Spotify Followers</option>
+            <option value="kick_followers">Kick Followers</option>
+          </optgroup>
+        </select>
+      </div>
+
+      <div class="order-inputs">
+        <label for="amountInput">Amount:</label>
+        <input type="number" id="amountInput" min="100" step="1" value="100" />
+        <label for="userInput">Username or Link:</label>
+        <input type="text" id="userInput" placeholder="@username or post URL" />
+      </div>
+
+      <div class="price-display">
+        Total Price: <span id="priceValue">0.00</span> €
+      </div>
+
+      <button id="submitOrder">Place Order</button>
+    </section>
+
+    <section class="payment-info">
+      <h2>Payment Instructions</h2>
+      <p>Please send your cryptocurrency payment to one of these wallets:</p>
+      <ul>
+        <li>
+          <strong>ETH / USDT / BNB:</strong>
+          <code id="walletEth">0x7c30f50325dE8626e83e8FE833c122F1df213bDc</code>
+          <button class="copy-btn" data-copy="0x7c30f50325dE8626e83e8FE833c122F1df213bDc">Copy</button>
+        </li>
+        <li>
+          <strong>BTC:</strong>
+          <code id="walletBtc">bc1qt6jd6dpfdzxl77qgshxrxpxtz6qce5nwerf4jj</code>
+          <button class="copy-btn" data-copy="bc1qt6jd6dpfdzxl77qgshxrxpxtz6qce5nwerf4jj">Copy</button>
+        </li>
+        <li>
+          <strong>USDT TRC20:</strong>
+          <code id="walletTrc20">TAL5nUx5DrPZeci3Mm9TwvhYp5T3LftpBi</code>
+          <button class="copy-btn" data-copy="TAL5nUx5DrPZeci3Mm9TwvhYp5T3LftpBi">Copy</button>
+        </li>
+      </ul>
+      <p>
+        After payment, please send your payment proof to
+        <a href="https://t.me/CRYPTOBOOSTSUPPORT" target="_blank">@CRYPTOBOOSTSUPPORT</a> on Telegram.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 CryptoBoost. All rights reserved.</p>
+  </footer>
+
+  <script src="scripts.js"></script>
+</body>
+</html>
